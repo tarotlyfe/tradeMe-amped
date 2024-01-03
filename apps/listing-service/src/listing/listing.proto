@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+                 package listing;
+service ListingService {
+ rpc create (ListingCreateInput) returns (Listing) {}
+rpc findMany (findManyParams) returns (stream Listing) {}
+rpc findOne (ListingWhereUniqueInput) returns (Listing) {}
+rpc update (ListingUpdateInput) returns (Listing) {}
+rpc delete (ListingWhereUniqueInput) returns (Listing) {}
+rpc findManyListing (ListingWhereUniqueInput) returns (stream Comment) {}
+rpc updateListing (CommentParams) returns (stream Comment) {}
+rpc connectListing (CommentParams) returns (Comment) {}
+rpc disconnectListing (CommentParams) returns (Comment) {}
+rpc findManyListing (ListingWhereUniqueInput) returns (stream ListingImage) {}
+rpc updateListing (ListingImageParams) returns (stream ListingImage) {}
+rpc connectListing (ListingImageParams) returns (ListingImage) {}
+rpc disconnectListing (ListingImageParams) returns (ListingImage) {} 
+ }
+message ListingCreateInput {
+repeated Comment comments = 1;
+string coverImage = 2;
+string createdAt = 3;
+string description = 4;
+string id = 5;
+repeated ListingImage listingImages = 6;
+string title = 7;
+string updatedAt = 8;
+};
+message Listing {
+repeated Comment comments = 1;
+string coverImage = 2;
+string createdAt = 3;
+string description = 4;
+string id = 5;
+repeated ListingImage listingImages = 6;
+string title = 7;
+string updatedAt = 8;
+};
+message ListingWhereUniqueInput {
+repeated Comment comments = 1;
+string coverImage = 2;
+string createdAt = 3;
+string description = 4;
+string id = 5;
+repeated ListingImage listingImages = 6;
+string title = 7;
+string updatedAt = 8;
+};
+message ListingUpdateInput {
+repeated Comment comments = 1;
+string coverImage = 2;
+string createdAt = 3;
+string description = 4;
+string id = 5;
+repeated ListingImage listingImages = 6;
+string title = 7;
+string updatedAt = 8;
+};
+message findManyParams {
+
+};
+message Comment {
+string createdAt = 1;
+string id = 2;
+string text = 3;
+string updatedAt = 4;
+};
+message CommentWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string text = 3;
+string updatedAt = 4;
+};
+message CommentParams {
+ListingWhereUniqueInput listingWhereUniqueInput = 1;
+CommentWhereUniqueInput commentWhereUniqueInput = 2;
+};
+message ListingImage {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+int32 order = 4;
+string updatedAt = 5;
+string url = 6;
+};
+message ListingImageWhereUniqueInput {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+int32 order = 4;
+string updatedAt = 5;
+string url = 6;
+};
+message ListingImageParams {
+ListingWhereUniqueInput listingWhereUniqueInput = 1;
+ListingImageWhereUniqueInput listingimageWhereUniqueInput = 2;
+};

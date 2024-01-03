@@ -1,0 +1,80 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  profiles  Profile? @relation(fields: [profileId], references: [id])
+  profileId String?  @unique
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Profile {
+  avatarUrl String?
+  bio       String?
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  listings  Listing[]
+  location  String?
+  updatedAt DateTime  @updatedAt
+  user      User?
+}
+
+model Category {
+  description    String?
+  id             String    @id @default(cuid())
+  imageUrl       String?
+  listings       Listing[]
+  name           String
+  parentCategory Category? @relation(name: "parentCategory", fields: [ParentId], references: [id])
+  ParentId       String?   @unique
+  subCategories  Category? @relation(name: "parentCategory")
+}
+
+model Listing {
+  category      Category?      @relation(fields: [categoryId], references: [id])
+  categoryId    String?
+  comments      Comment[]
+  coverImage    String?
+  createdAt     DateTime       @default(now())
+  description   String?
+  id            String         @id @default(cuid())
+  listingImages ListingImage[]
+  owner         Profile        @relation(fields: [ownerId], references: [id])
+  ownerId       String
+  title         String
+  updatedAt     DateTime       @updatedAt
+}
+
+model ListingImage {
+  altText   String?
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  listing   Listing[]
+  order     Int?
+  updatedAt DateTime  @updatedAt
+  url       String
+}
+
+model Comment {
+  author    Profile? @relation(fields: [ProfileId], references: [id])
+  ProfileId String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  listing   Listing  @relation(fields: [listingId], references: [id])
+  listingId String
+  text      String
+  updatedAt DateTime @updatedAt
+}

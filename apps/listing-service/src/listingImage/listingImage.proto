@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+                 package listingImage;
+service ListingImageService {
+ rpc create (ListingImageCreateInput) returns (ListingImage) {}
+rpc findMany (findManyParams) returns (stream ListingImage) {}
+rpc findOne (ListingImageWhereUniqueInput) returns (ListingImage) {}
+rpc update (ListingImageUpdateInput) returns (ListingImage) {}
+rpc delete (ListingImageWhereUniqueInput) returns (ListingImage) {}
+rpc findManyListingImages (ListingImageWhereUniqueInput) returns (stream Listing) {}
+rpc updateListingImages (ListingParams) returns (stream Listing) {}
+rpc connectListingImages (ListingParams) returns (Listing) {}
+rpc disconnectListingImages (ListingParams) returns (Listing) {} 
+ }
+message ListingImageCreateInput {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+repeated Listing listing = 4;
+int32 order = 5;
+string updatedAt = 6;
+string url = 7;
+};
+message ListingImage {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+repeated Listing listing = 4;
+int32 order = 5;
+string updatedAt = 6;
+string url = 7;
+};
+message ListingImageWhereUniqueInput {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+repeated Listing listing = 4;
+int32 order = 5;
+string updatedAt = 6;
+string url = 7;
+};
+message ListingImageUpdateInput {
+string altText = 1;
+string createdAt = 2;
+string id = 3;
+repeated Listing listing = 4;
+int32 order = 5;
+string updatedAt = 6;
+string url = 7;
+};
+message findManyParams {
+
+};
+message Listing {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingWhereUniqueInput {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingParams {
+ListingImageWhereUniqueInput listingImageWhereUniqueInput = 1;
+ListingWhereUniqueInput listingWhereUniqueInput = 2;
+};
