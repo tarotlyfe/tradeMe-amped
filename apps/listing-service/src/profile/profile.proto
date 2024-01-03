@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+                 package profile;
+service ProfileService {
+ rpc create (ProfileCreateInput) returns (Profile) {}
+rpc findMany (findManyParams) returns (stream Profile) {}
+rpc findOne (ProfileWhereUniqueInput) returns (Profile) {}
+rpc update (ProfileUpdateInput) returns (Profile) {}
+rpc delete (ProfileWhereUniqueInput) returns (Profile) {}
+rpc findManyAuthor (ProfileWhereUniqueInput) returns (stream Comment) {}
+rpc updateAuthor (CommentParams) returns (stream Comment) {}
+rpc connectAuthor (CommentParams) returns (Comment) {}
+rpc disconnectAuthor (CommentParams) returns (Comment) {}
+rpc findManyOwner (ProfileWhereUniqueInput) returns (stream Listing) {}
+rpc updateOwner (ListingParams) returns (stream Listing) {}
+rpc connectOwner (ListingParams) returns (Listing) {}
+rpc disconnectOwner (ListingParams) returns (Listing) {} 
+ }
+message ProfileCreateInput {
+string avatarUrl = 1;
+string bio = 2;
+repeated Comment comments = 3;
+string createdAt = 4;
+string id = 5;
+repeated Listing listings = 6;
+string location = 7;
+string updatedAt = 8;
+User user = 9;
+};
+message Profile {
+string avatarUrl = 1;
+string bio = 2;
+repeated Comment comments = 3;
+string createdAt = 4;
+string id = 5;
+repeated Listing listings = 6;
+string location = 7;
+string updatedAt = 8;
+User user = 9;
+};
+message ProfileWhereUniqueInput {
+string avatarUrl = 1;
+string bio = 2;
+repeated Comment comments = 3;
+string createdAt = 4;
+string id = 5;
+repeated Listing listings = 6;
+string location = 7;
+string updatedAt = 8;
+User user = 9;
+};
+message ProfileUpdateInput {
+string avatarUrl = 1;
+string bio = 2;
+repeated Comment comments = 3;
+string createdAt = 4;
+string id = 5;
+repeated Listing listings = 6;
+string location = 7;
+string updatedAt = 8;
+User user = 9;
+};
+message findManyParams {
+
+};
+message Comment {
+string createdAt = 1;
+string id = 2;
+string text = 3;
+string updatedAt = 4;
+};
+message CommentWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string text = 3;
+string updatedAt = 4;
+};
+message CommentParams {
+ProfileWhereUniqueInput profileWhereUniqueInput = 1;
+CommentWhereUniqueInput commentWhereUniqueInput = 2;
+};
+message Listing {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingWhereUniqueInput {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingParams {
+ProfileWhereUniqueInput profileWhereUniqueInput = 1;
+ListingWhereUniqueInput listingWhereUniqueInput = 2;
+};

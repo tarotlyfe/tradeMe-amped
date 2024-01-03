@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+                 package category;
+service CategoryService {
+ rpc create (CategoryCreateInput) returns (Category) {}
+rpc findMany (findManyParams) returns (stream Category) {}
+rpc findOne (CategoryWhereUniqueInput) returns (Category) {}
+rpc update (CategoryUpdateInput) returns (Category) {}
+rpc delete (CategoryWhereUniqueInput) returns (Category) {}
+rpc findManyCategory (CategoryWhereUniqueInput) returns (stream Listing) {}
+rpc updateCategory (ListingParams) returns (stream Listing) {}
+rpc connectCategory (ListingParams) returns (Listing) {}
+rpc disconnectCategory (ListingParams) returns (Listing) {} 
+ }
+message CategoryCreateInput {
+string description = 1;
+string id = 2;
+string imageUrl = 3;
+repeated Listing listings = 4;
+string name = 5;
+Category subCategories = 6;
+};
+message Category {
+string description = 1;
+string id = 2;
+string imageUrl = 3;
+repeated Listing listings = 4;
+string name = 5;
+Category subCategories = 6;
+};
+message CategoryWhereUniqueInput {
+string description = 1;
+string id = 2;
+string imageUrl = 3;
+repeated Listing listings = 4;
+string name = 5;
+Category subCategories = 6;
+};
+message CategoryUpdateInput {
+string description = 1;
+string id = 2;
+string imageUrl = 3;
+repeated Listing listings = 4;
+string name = 5;
+Category subCategories = 6;
+};
+message findManyParams {
+
+};
+message Listing {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingWhereUniqueInput {
+string coverImage = 1;
+string createdAt = 2;
+string description = 3;
+string id = 4;
+string title = 5;
+string updatedAt = 6;
+};
+message ListingParams {
+CategoryWhereUniqueInput categoryWhereUniqueInput = 1;
+ListingWhereUniqueInput listingWhereUniqueInput = 2;
+};
